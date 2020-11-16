@@ -1,4 +1,4 @@
- 
+  
 class PolyTreeNode
   attr_reader :value, :parent
   attr_accessor :children
@@ -42,8 +42,8 @@ class PolyTreeNode
   end
 
 
-  def bfs(target)
-    queue = [self]
+  def bfs(target) #7,6
+    queue = [self] #@rootnode
 
     until queue.empty?
       return queue.first if queue.first.value == target
@@ -53,5 +53,9 @@ class PolyTreeNode
     nil
   end
 
+  # def inspect
+  #   @value.inspect
+  # end
   
 end
+

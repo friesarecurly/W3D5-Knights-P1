@@ -1,6 +1,6 @@
 require 'rspec'
 require '00_tree_node'
- 
+  
 describe PolyTreeNode do
   let(:node1) { PolyTreeNode.new('root') }
   let(:node2) { PolyTreeNode.new('child1') }
