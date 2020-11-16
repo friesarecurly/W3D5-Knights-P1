@@ -43,7 +43,7 @@ class KnightPathFinder
       queue = [@root_node] # 1
       
       new_pos = [nil]
-      until new_pos.empty?
+      until queue.empty?
         current = queue.shift #root_node
         new_pos = new_move_positions(current.value) #0,0 1,2 2,1
         new_pos.each do |np|
@@ -60,14 +60,12 @@ class KnightPathFinder
     def find_path(end_pos) # 0,0
       self.build_move_tree
       child = @root_node.dfs(end_pos)
-
       trace_path_back(child)
-
     end
 
     def trace_path_back(child)
       current = child
-      result = [@root_node.value]
+      result = []
       
       # debugger
       while current.parent != nil
@@ -75,14 +73,14 @@ class KnightPathFinder
         current = current.parent
       end
 
-      result
+      [@root_node.value] + result.reverse
     end
 
 end
 
 kpf = KnightPathFinder.new([0, 0])
-# p kpf.find_path([3,6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
-p kpf.find_path([6, 1]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
+p kpf.find_path([7,6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+p kpf.find_path([6,2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
 
 # kpf = KnightPathFinder.new([0,0])
 # p kpf.build_move_tree
