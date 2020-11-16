@@ -1,4 +1,5 @@
 require_relative "tree_node"
+require "byebug"
 
 class KnightPathFinder
 
@@ -21,7 +22,7 @@ class KnightPathFinder
 
       valid
     end
-
+ 
     def initialize(pos)
       @root_node = PolyTreeNode.new(pos)
       @start = pos
@@ -55,7 +56,33 @@ class KnightPathFinder
       # @root_node
     end
 
+
+    def find_path(end_pos) # 0,0
+      self.build_move_tree
+      child = @root_node.dfs(end_pos)
+
+      trace_path_back(child)
+
+    end
+
+    def trace_path_back(child)
+      current = child
+      result = [@root_node.value]
+      
+      # debugger
+      while current.parent != nil
+        result << current.value
+        current = current.parent
+      end
+
+      result
+    end
+
 end
+
+kpf = KnightPathFinder.new([0, 0])
+# p kpf.find_path([3,6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+p kpf.find_path([6, 1]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
 
 # kpf = KnightPathFinder.new([0,0])
 # p kpf.build_move_tree
